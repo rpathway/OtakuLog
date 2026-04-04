@@ -228,10 +228,11 @@ async function loadNavigation() {
  * 
  */
 export async function loadHeaderFooter() {
+  const base = import.meta.env.BASE_URL;
   const header = document.querySelector('header');
   const footer = document.querySelector('footer');
-  const headerTemplate = await loadTemplate('../partials/header.html');
-  const footerTemplate = await loadTemplate('../partials/footer.html')
+  const headerTemplate = await loadTemplate(`${base}/partials/header.html`);
+  const footerTemplate = await loadTemplate(`${base}/partials/footer.html`)
 
   header.innerHTML = headerTemplate;
   footer.innerHTML = footerTemplate;
