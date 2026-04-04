@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* :root{
+  --color-primary: #0D1117;
+  --color-secondary: #9B5DE5;
+  --color-accent1: #FF4B6E;
+  --color-accent2: #161B22;
+  --color-accent3: #21262D;
+  --font-inter: "Inter", sans-serif;
+  --font-syne: "Syne", sans-serif;
+} */
+
+@theme {
+  --color-primary: #0D1117;
+  --color-secondary: #9B5DE5;
+  --color-accent1: #FF4B6E;
+  --color-accent2: #161B22;
+  --color-accent3: #21262D;
+
+  --font-inter: "Inter", sans-serif;
+  --font-syne: "Syne", sans-serif;
+}
+
+
+/* Nav styles */
+
+
+.nav-link-large {
+  @apply flex px-6 py-2 mx-1 text-white no-underline rounded-lg transition-colors duration-300 cursor-pointer
+    hover:bg-secondary hover:text-black
+    hover:inset-ring-1 hover:inset-ring-accent1/30
+    hover:shadow-md    hover:shadow-secondary
+    [&.active]:font-semibold         [&.active]:bg-secondary
+    [&.active]:text-black            [&.active]:inset-ring-1
+    [&.active]:inset-ring-accent1/30 [&.active]:shadow-md
+    [&.active]:shadow-secondary;
+}
+
+.nav-link-small {
+  @apply flex p-4 text-white no-underline transition-colors duration-300 hover:bg-secondary hover:text-black [&.active]:font-semibold [&.active]:bg-secondary [&.active]:text-black cursor-pointer
+}
+
+.nav-list-small {
+  @apply border-t border-b border-accent1
+}
+
+.nav-overlay {
+  @apply fixed top-[95px] inset-0 z-1 backdrop-blur-sm bg-black/30 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out;
+}
+
+.nav-overlay.active {
+  @apply opacity-100 pointer-events-auto cursor-pointer;
+}
+
+
+/* Dialog styles */
+
+
+.dialog-backdrop {
+  @apply fixed inset-0 bg-gray-900/80 backdrop-blur-sm
+}
+
+.dialog-save {
+  @apply inline-flex w-full justify-center rounded-md bg-lime-500 px-3 py-2 text-sm font-semibold text-black hover:bg-lime-400 sm:ml-3 sm:w-auto cursor-pointer;
+}
+
+.dialog-cancel {
+  @apply mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto cursor-pointer;
+}
+
+
+/* Carousel styles */
+
+
+.carousel-wrapper {
+  @apply relative inline-block w-full mt-3
+}
+
+.carousel-container {
+  @apply flex gap-1 mb-8 overflow-x-auto scroll-smooth [scrollbar-width:none] [scroll-snap-type:x_mandatory]
+}
+
+.carousel-card {
+  @apply flex flex-col p-1 m-[1px] bg-accent3 [scroll-snap-align:center] rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary
+}
+
+.carousel-title {
+  @apply px-2 w-[150px] text-sm text-center text-white whitespace-nowrap overflow-hidden text-ellipsis
+}
+
+.fade-left, .fade-right {
+  @apply pointer-events-none absolute top-0 bottom-0 w-10;
+}
+
+.fade-right {
+  @apply right-0 bg-gradient-to-l from-[#161B22] via-[#161B22]/10 to-transparent;
+}
+
+.fade-left {
+  @apply left-0 bg-gradient-to-r from-[#161B22] via-[#161B22]/10 to-transparent;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Robbie Yamashita">
+    <meta name="description" content="OtakuLog - An anime tv series tracker for ongoing tv series.">
+    <title>OtakuLog | Home</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Syne:wght@400..800&display=swap" rel="stylesheet">
+
+    <script type="module" src="/js/main.mjs"></script>
+    <script type="module" src="/js/home-page.mjs"></script>
+  </head>
+  <body class="bg-accent2 text-white font-inter">
+    <header></header>
+
+    <main class="flex flex-col h-auto p-2 mt-4 [&_hr]:my-2 [&_hr]:h-px [&_hr]:border-none [&_hr]:bg-gray-500">
+
+      <!-- Start of Movies Section -->
+      <div class="flex flex-row justify-between">
+        <h2 class="text-2xl font-inter font-bold">Movies</h2>
+        <a class="text-end text-xs place-self-end text-gray-400" href="">See More</a>
+      </div>
+      <hr>
+      <div class="carousel-wrapper">
+        <div class="carousel-container" id="carousel">
+
+          <!-- Cards dynamically loaded -->
+          <div class="carousel-card" title="Frieren: Beyond Journey's End">
+            <a href="/details/?malid=52991">
+              <h2 class="carousel-title">Sousou no Frieren</h2>
+              <img class="w-[150px] h-auto rounded-sm" src="https:\/\/myanimelist.net\/images\/anime\/1015\/138006.jpg" alt="Cover art for tv series: Frieren: Beyond Journey's End">
+            </a>
+            <div class="grid grid-cols-2 text-sm text-white max-w-[240px] my-1">
+              <span class="col-start-1"            title="Series ranking">        <i class="bi bi-fire text-orange-500"></i> #1</span>
+              <span class="col-start-2 text-right" title="Series favorited by">87k ❤️</span>
+              <span class="col-start-1"            title="Series score out of 10"><i class="bi bi-star-fill text-amber-500"></i> 9.25</span>
+              <span class="col-start-2 text-right" title="Series status">Ongoing <i class="bi bi-broadcast text-lime-500"></i></span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Carousel hints -->
+        <div class="fade-left hidden"></div>
+        <div class="fade-right"></div>
+      </div>
+      <!-- End of Movies Section -->
+
+      <!-- Test Section -->
+      <div class="flex flex-row justify-between">
+        <h2 class="text-2xl font-inter font-bold">OVA</h2>
+        <a class="text-end text-xs place-self-end text-gray-400" href="">See More</a>
+      </div>
+      <hr>
+      <div class="carousel-wrapper">
+        <div class="carousel-container" id="carousel">
+  
+          <div class="carousel-card">
+            <a href="/details/?malid=52991">
+              <h2 class="carousel-title">Sousou no Frieren</h2>
+              <img class="w-[150px] h-auto" src="https:\/\/myanimelist.net\/images\/anime\/1015\/138006.jpg" alt="Cover art for tv series: Frieren: Beyond Journey's End">
+            </a>
+            <!-- <div class="grid grid-cols-2 p-1 text-sm text-white"> -->
+            <div class="grid grid-cols-2 text-sm text-white max-w-[240px] my-1">
+              <span class="col-start-1"            title="Series ranking">        <i class="bi bi-fire text-orange-500"></i> #1</span>
+              <span class="col-start-2 text-right" title="Series favorited by">87k ❤️</span>
+              <span class="col-start-1"            title="Series score out of 10"><i class="bi bi-star-fill text-amber-500"></i> 9.25</span>
+              <span class="col-start-2 text-right" title="Series status">Ongoing <i class="bi bi-broadcast text-lime-500"></i></span>
+            </div>
+          </div>
+          <div class="carousel-card">
+            <a href="/details/?malid=52991">
+              <h2 class="carousel-title">Sousou no Frieren</h2>
+              <img class="w-[150px] h-auto" src="https:\/\/myanimelist.net\/images\/anime\/1015\/138006.jpg" alt="Cover art for tv series: Frieren: Beyond Journey's End">
+            </a>
+            <!-- <div class="grid grid-cols-2 p-1 text-sm text-white"> -->
+            <div class="grid grid-cols-2 text-sm text-white max-w-[240px] my-1">
+              <span class="col-start-1"            title="Series ranking">        <i class="bi bi-fire text-orange-500"></i> #1</span>
+              <span class="col-start-2 text-right" title="Series favorited by">87k ❤️</span>
+              <span class="col-start-1"            title="Series score out of 10"><i class="bi bi-star-fill text-amber-500"></i> 9.25</span>
+              <span class="col-start-2 text-right" title="Series status">Ongoing <i class="bi bi-broadcast text-lime-500"></i></span>
+            </div>
+          </div>
+          <div class="carousel-card">
+            <a href="/details/?malid=52991">
+              <h2 class="carousel-title">Sousou no Frieren</h2>
+              <img class="w-[150px] h-auto" src="https:\/\/myanimelist.net\/images\/anime\/1015\/138006.jpg" alt="Cover art for tv series: Frieren: Beyond Journey's End">
+            </a>
+            <!-- <div class="grid grid-cols-2 p-1 text-sm text-white"> -->
+            <div class="grid grid-cols-2 text-sm text-white max-w-[240px] my-1">
+              <span class="col-start-1"            title="Series ranking">        <i class="bi bi-fire text-orange-500"></i> #1</span>
+              <span class="col-start-2 text-right" title="Series favorited by">87k ❤️</span>
+              <span class="col-start-1"            title="Series score out of 10"><i class="bi bi-star-fill text-amber-500"></i> 9.25</span>
+              <span class="col-start-2 text-right" title="Series status">Ongoing <i class="bi bi-broadcast text-lime-500"></i></span>
+            </div>
+          </div>
+          <div class="carousel-card">
+            <a href="/details/?malid=52991">
+              <h2 class="carousel-title">Sousou no Frieren</h2>
+              <img class="w-[150px] h-auto" src="https:\/\/myanimelist.net\/images\/anime\/1015\/138006.jpg" alt="Cover art for tv series: Frieren: Beyond Journey's End">
+            </a>
+            <!-- <div class="grid grid-cols-2 p-1 text-sm text-white"> -->
+            <div class="grid grid-cols-2 text-sm text-white max-w-[240px] my-1">
+              <span class="col-start-1"            title="Series ranking">        <i class="bi bi-fire text-orange-500"></i> #1</span>
+              <span class="col-start-2 text-right" title="Series favorited by">87k ❤️</span>
+              <span class="col-start-1"            title="Series score out of 10"><i class="bi bi-star-fill text-amber-500"></i> 9.25</span>
+              <span class="col-start-2 text-right" title="Series status">Ongoing <i class="bi bi-broadcast text-lime-500"></i></span>
+            </div>
+          </div>
+          <div class="carousel-card">
+            <a href="/details/?malid=52991">
+              <h2 class="carousel-title">Sousou no Frieren</h2>
+              <img class="w-[150px] h-auto" src="https:\/\/myanimelist.net\/images\/anime\/1015\/138006.jpg" alt="Cover art for tv series: Frieren: Beyond Journey's End">
+            </a>
+            <!-- <div class="grid grid-cols-2 p-1 text-sm text-white"> -->
+            <div class="grid grid-cols-2 text-sm text-white max-w-[240px] my-1">
+              <span class="col-start-1"            title="Series ranking">        <i class="bi bi-fire text-orange-500"></i> #1</span>
+              <span class="col-start-2 text-right" title="Series favorited by">87k ❤️</span>
+              <span class="col-start-1"            title="Series score out of 10"><i class="bi bi-star-fill text-amber-500"></i> 9.25</span>
+              <span class="col-start-2 text-right" title="Series status">Ongoing <i class="bi bi-broadcast text-lime-500"></i></span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Carousel hints -->
+        <div class="fade-left hidden"></div>
+        <div class="fade-right"></div>
+      </div>
+
+    </main>
+
+    <footer class="flex flex-col p-4 items-center justify-center text-white bg-primary"></footer>
+  </body>
+</html>

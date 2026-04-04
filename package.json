@@ -1,0 +1,24 @@
+{
+  "name": "otakulog",
+  "version": "0.0.0",
+  "description": "OtakuLog - An anime webapp tv series tracker",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "preview": "vite preview",
+    "build": "vite build --emptyOutDir",
+    "lint": "eslint *.js src/**/*.js",
+    "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\""
+  },
+  "devDependencies": {
+    "eslint": "^10.2.0",
+    "prettier": "^3.8.1",
+    "vite": "^8.0.3"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "bootstrap-icons": "^1.13.1",
+    "tailwindcss": "^4.2.2"
+  }
+}
