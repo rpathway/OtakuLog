@@ -23,6 +23,14 @@
 }
 
 
+/* Alert message styles */
+
+
+.alert-message-container {
+  @apply flex items-center text-white px-4 py-3
+}
+
+
 /* Nav styles */
 
 
@@ -65,6 +73,10 @@
   @apply inline-flex w-full justify-center rounded-md bg-lime-500 px-3 py-2 text-sm font-semibold text-black hover:bg-lime-400 sm:ml-3 sm:w-auto cursor-pointer;
 }
 
+.dialog-save:disabled {
+  @apply bg-lime-200 cursor-default;
+}
+
 .dialog-cancel {
   @apply mt-3 inline-flex w-full justify-center rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-0 sm:w-auto cursor-pointer;
 }
@@ -90,7 +102,11 @@
 }
 
 .fade-left, .fade-right {
-  @apply pointer-events-none absolute top-0 bottom-0 w-10;
+  @apply pointer-events-none absolute top-0 bottom-8 w-15;
+}
+
+.fade-left:not(.hidden), .fade-right:not(.hidden) {
+  @apply flex items-center justify-center;
 }
 
 .fade-right {
@@ -99,4 +115,8 @@
 
 .fade-left {
   @apply left-0 bg-gradient-to-r from-[#161B22] via-[#161B22]/10 to-transparent;
+}
+
+.fade-left button, .fade-right button {
+  @apply pointer-events-auto text-white text-5xl cursor-pointer border-none hover:bg-slate-800/60 hover:rounded-2xl h-full w-50 m-0;
 }
