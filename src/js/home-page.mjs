@@ -1,5 +1,6 @@
 import { HOME_CATEGORIES, fetchWithCache, normalizeJikanData } from './jikan.mjs';
 import { initCarousel } from './utils.mjs';
+import { openSeriesModal } from './modal.mjs';
 
 const airingStatus = {
   'Finished Airing': 'Finished',
@@ -12,11 +13,11 @@ function createCarouselCard(data) {
   const normalizeInt = new Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'short' });
   const top10 = data.rank <= 10 ? 'text-orange-500' : 'text-white';
   return `
-    <div class="carousel-card" title="${data.title}">
-      <a href="/details/?malid=${data.id}">
+    <div class="carousel-card" title="${data.title}" data-malid="${data.id}">
+      <div>
         <img class="w-[150px] h-[200px] object-cover rounded-xl" src="${data.image}" alt="Cover art for: ${data.title}" loading="lazy">
         <h2 class="carousel-title">${data.title}</h2>
-      </a>
+      </div>
       <div class="grid grid-cols-2 text-sm text-white max-w-[150px] my-1">
         <span class="col-start-1" title="Ranking"><i class="bi bi-fire ${top10}"></i> #${data.rank ?? '-'}</span>
         <span class="col-start-2 text-right" title="Favorites">${normalizeInt.format(data.favorites)} ❤️</span>
@@ -72,8 +73,29 @@ export async function loadHomePage() {
 
       fetchWithCache(url).then(items => {
         carousel.innerHTML = items.map(item => createCarouselCard(normalizeJikanData(item))).join('');
+
+        // Open modal for series detailed view on card click
+        carousel.querySelectorAll('.carousel-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const malId = card.dataset.malid;
+            if (malId) openSeriesModal(parseInt(malId));
+          });
+        })
+
         initCarousel(section.querySelector('.carousel-container'));
-      });
+      }).catch(error => {
+        if (error?.status === 429) {
+          carousel.innerHTML = `
+            <div class="flex flex-col p-1 m-[1px] w-full h-[200px] bg-accent3 rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary font-syne text-center justify-center">
+              <i class="bi bi-exclamation-triangle text-yellow-400"></i>
+              <div class="md:flex md:justify-center">
+                <p>Rate limit exceeded!&nbsp;</p>
+                <p>Try again in 30 seconds.</p>
+              </div>
+            </div>
+          `;
+        }
+      })
     });
   }, { rootMargin: '200px' });
 
@@ -86,4 +108,4 @@ export async function loadHomePage() {
 }
 
 
-// loadHomePage();
+loadHomePage();

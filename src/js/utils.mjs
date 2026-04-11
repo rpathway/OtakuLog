@@ -4,14 +4,14 @@ const DEFAULT_SETTINGS = {
     label: 'SFW Only',
     value: true
   },
-  'test-setting': {
-    label: 'Test Setting',
-    value: true
-  },
-  'test-setting2': {
-    label: 'Test Setting1',
-    value: true
-  },
+  // 'test-setting': {
+  //   label: 'Test Setting',
+  //   value: true
+  // },
+  // 'test-setting2': {
+  //   label: 'Test Setting1',
+  //   value: true
+  // },
 };
 
 
@@ -363,8 +363,8 @@ export function initCarousel(carouselWrapper) {
   const fadeLeft = wrapper.querySelector('.fade-left');
   const fadeRight = wrapper.querySelector('.fade-right');
   if (!fadeLeft || !fadeRight) return console.error('no fade divs found', wrapper.innerHTML);
-  const btnLeft = fadeLeft.querySelector('button');
-  const btnRight = fadeRight.querySelector('button');
+  const btnLeft = fadeLeft.querySelector('.bi-chevron-compact-left');
+  const btnRight = fadeRight.querySelector('.bi-chevron-compact-right');
 
   function updateFades() {
     const maxScroll = carousel.scrollWidth - carousel.clientWidth;
@@ -374,11 +374,11 @@ export function initCarousel(carouselWrapper) {
   }
 
   btnLeft.addEventListener('click', () => {
-    const scrollAmount = window.innerWidth < 640 ? 150 : 600;
+    const scrollAmount = window.innerWidth < 640 ? 300 : 600;
     carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
   });
   btnRight.addEventListener('click', () => {
-    const scrollAmount = window.innerWidth < 640 ? 150 : 600;
+    const scrollAmount = window.innerWidth < 640 ? 300 : 600;
     carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' })
   });
   carousel.addEventListener('scroll', updateFades);

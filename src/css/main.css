@@ -94,7 +94,7 @@
 }
 
 .carousel-card {
-  @apply flex flex-col p-1 m-[1px] bg-accent3 [scroll-snap-align:center] rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary
+  @apply flex flex-col p-1 m-[1px] bg-accent3 [scroll-snap-align:center] rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary cursor-pointer transition-transform duration-300 hover:translate-y-[-2px] hover:bg-gray-800/20
 }
 
 .carousel-title {
@@ -119,4 +119,60 @@
 
 .fade-left button, .fade-right button {
   @apply pointer-events-auto text-white text-5xl cursor-pointer border-none hover:bg-slate-800/60 hover:rounded-2xl h-full w-50 m-0;
+}
+
+
+/* Series modal */
+
+
+.series-modal {
+  @apply fixed inset-0 z-50 items-end sm:items-center justify-center;
+}
+
+.series-modal-backdrop {
+  @apply fixed inset-0 bg-black/70 backdrop-blur-sm;
+}
+
+.series-modal-container {
+  @apply relative z-10 bg-gray-900 w-full sm:w-[min(90vw,42rem)] max-h-[90dvh] sm:max-h-[85dvh] overflow-y-auto rounded-t-2xl sm:rounded-2xl inset-ring-1 inset-ring-accent1/30 shadow-lg shadow-secondary;
+}
+
+.series-modal-banner {
+  @apply w-full h-32 sm:h-48 bg-cover bg-center bg-accent3;
+}
+
+.series-modal-cover {
+  @apply absolute bottom-0 left-4 translate-y-1/2 w-22 h-30 sm:w-24 sm:h-36 object-cover rounded-xl inset-ring-2 inset-ring-accent1/40 shadow-md;
+}
+
+.series-modal-title {
+  @apply text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2;
+}
+
+.series-modal-stats {
+  @apply flex flex-col items-center bg-accent3 rounded-lg p-2 text-white text-sm gap-1;
+
+  & span {
+    @apply font-bold;
+  };
+
+  & p {
+    @apply text-xs text-gray-400;
+  }
+}
+
+.series-modal-genre {
+  @apply text-xs px-2 py-0.5 rounded-full bg-accent3 text-accent1 border border-secondary/80;
+}
+
+.series-modal-ep-btn {
+  @apply w-8 h-8 rounded-full bg-accent3 text-white border border-accent1/30 flex items-center justify-center cursor-pointer hover:bg-secondary hover:border-secondary transition-colors;
+}
+
+.series-modal-input {
+  @apply bg-accent3 border border-accent1/30 rounded-lg px-3 py-1.5 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-secondary;
+}
+
+.series-modal-add-list-btn {
+  @apply bg-secondary/20 border border-secondary/30 text-accent1 text-sm px-3 py-1.5 rounded-lg hover:bg-secondary hover:text-black transition-colors cursor-pointer;
 }

@@ -26,8 +26,8 @@ export function normalizeJikanData(item) {
 }
 
 /**
- *  fetches data with cache ttl of 30 minutes so we
- *    don't get rate limited.
+ *  fetches data with cache ttl of 30 minutes to
+ *    reduce being rate limited.
  * 
  * 
  * @param {*} url 
@@ -44,7 +44,14 @@ export async function fetchWithCache(url = '') {
   }
 
   const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  // We got rate limited, return with banner.
+  if (response.status == 429) {
+    const error = new Error(`HTTP ${response.status}`);
+    error.status = response.status
+    throw error;
+  } else if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
   const json = await response.json();
 
   // Save to cache with timestamp
