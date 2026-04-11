@@ -1,5 +1,4 @@
 const JIKAN_URL = import.meta.env.VITE_JIKAN_BASE_URL
-console.log(`JIKAN_URL: ${JIKAN_URL}`)
 const TOP_ANIME_URL = `${JIKAN_URL}/top/anime`
 export const HOME_CATEGORIES = {
   Favorites:  `${TOP_ANIME_URL}?filter=favorite&limit=20`,
