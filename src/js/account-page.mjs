@@ -65,7 +65,7 @@ async function deliverAccountPage(params) {
 async function deliverFormPage() {
   const main = document.querySelector('main');
   try {
-    const formPage = await loadTemplate(`${BASE_URL}/partials/account-login.html`);
+    const formPage = await loadTemplate(`${BASE_URL}partials/account-login.html`);
     main.innerHTML = formPage;
   } catch (e) {
     console.error(`Error in deliverFormPage: ${e}`);
