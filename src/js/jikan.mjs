@@ -10,6 +10,16 @@ export const HOME_CATEGORIES = {
   TV:         `${TOP_ANIME_URL}?type=tv&limit=20`,
   Specials:   `${TOP_ANIME_URL}?type=tv_special&limit=20`,
 };
+export const HOME_CATEGORIES_FALLBACK = {
+  Favorites:  `/json/favorite.json`,
+  Popular:    `/json/bypopularity.json`,
+  Airing:     `/json/airing.json`,
+  Upcoming:   `/json/upcoming.json`,
+  Movies:     `/json/movie.json`,
+  OVA:        `/json/ova.json`,
+  TV:         `/json/tv.json`,
+  Specials:   `/json/tv_special.json`,
+}
 
 
 
@@ -33,7 +43,7 @@ export function normalizeJikanData(item) {
  * @param {*} url 
  * @returns 
  */
-export async function fetchWithCache(url = '') {
+export async function fetchWithCache(url = '', fallbackUrl = '') {
   const CACHE_TTL = 1000 * 60 * 30;
   const cacheKey = `cache:${url}`;
   const cached = JSON.parse(localStorage.getItem(cacheKey));
@@ -43,24 +53,39 @@ export async function fetchWithCache(url = '') {
     return cached.data;
   }
 
-  const response = await fetch(url);
-  // We got rate limited, return with banner.
-  if (response.status == 429) {
-    const error = new Error(`HTTP ${response.status}`);
-    error.status = response.status
-    throw error;
-  } else if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
+  try {
+    const response = await fetch(url);
+    // We got rate limited, return with banner.
+    if (!response.ok) {
+      const error = new Error(`HTTP ${response.status}`);
+      error.status = response.status
+      throw error;
+    }
+    const json = await response.json();
+
+    // Jikan returns errors in body response, return to handle errors
+    if (json?.status) return json;
+
+    // Save to cache with timestamp
+    localStorage.setItem(cacheKey, JSON.stringify({
+      timestamp: Date.now(),
+      data: json.data
+    }));
+
+    return json.data;
+  } catch (e) {
+    if (fallbackUrl) {
+      console.warn(`Falling back to local JSON for ${url}`);
+      const fallback = await fetch(fallbackUrl);
+
+      // if fallback also fails, throw original error
+      if (!fallback.ok) throw e;
+      const json = await fallback.json();
+
+      return json.data ?? json;
+    }
+    throw e;
   }
-  const json = await response.json();
-
-  // Save to cache with timestamp
-  localStorage.setItem(cacheKey, JSON.stringify({
-    timestamp: Date.now(),
-    data: json.data
-  }));
-
-  return json.data;
 }
 
 export async function fetchCategory(url = '') {

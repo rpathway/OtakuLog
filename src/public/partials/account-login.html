@@ -1,0 +1,39 @@
+<h1 class="font-syne font-bold m-auto text-4xl">Login</h1>
+<hr class="m-4">
+
+<form id="account-form">
+  <label for="username" class="hidden text-xl"><span class="hidden text-red-400" id="required-field">*</span> Username</label>
+  <input type="username" name="username" id="username" class="hidden input-box" autocomplete="username" required disabled>
+
+  <label for="email" class="text-xl"><span class="hidden text-red-400" id="required-field">*</span> Email</label>
+  <input type="email" name="email" id="email" class="input-box" autocomplete="email" required>
+
+  <label for="password" class="text-xl"><span class="hidden text-red-400" id="required-field">*</span> Password</label>
+  <input type="password" name="password" id="password" class="input-box" minlength="8" maxlength="64" autocomplete="password" required>
+
+  <!-- Password quality -->
+  <div class="hidden w-full m-auto h-2 mt-1 mb-8 bg-gray-300 rounded" id="pw-quality-bar">
+    <div id="strength-bar" class="h-2 rounded transition-all"></div>
+    <p id="strength-text" class="mt-1 mr-2 text-right"></p>
+  </div>
+  <!-- Password suggestions -->
+  <div class="hidden flex flex-col m-auto p-2 md:p-4 border-1 border-accent1/30 rounded-xl" id="pw-suggestions">
+    Password suggestions:
+    <span class="ml-2">
+      <i class="bi bi-check-circle-fill md:pr-4" id="pw-length"></i>
+      8-64 characters.
+    </span>
+    <span class="ml-2">
+      <i class="bi bi-check-circle-fill md:pr-4" id="pw-guess"></i>
+      Hard to guess.
+    </span>
+    <span class="ml-2">
+      <i class="bi bi-check-circle-fill md:pr-4" id="pw-common"></i>
+      Not commonly used.
+    </span>
+  </div>
+
+  <span class="loading-spinner hidden m-auto mt-4 p-3 w-50 text-center border-3 border-secondary bg-secondary/40 text-white rounded-lg bg-secondary text-black"><i class="bi bi-hypnotize inline-block animate-spin"></i></span>
+  <input id="submit-form-btn" type="submit" value="Login" class="m-auto mt-4 p-3 w-50 disabled:text-white disabled:bg-secondary/40 border-3 disabled:border-secondary/30 border-secondary hover:not-disabled:bg-secondary/40 hover:not-disabled:text-white rounded-lg bg-secondary text-black transition-colors cursor-pointer disabled:cursor-default" disabled>
+  <button id="toggle-form-btn" class="m-auto mt-4 p-2 rounded-xl cursor-pointer underline decoration-solid" data-form-type="Sign up">Sign up</button>
+</form>

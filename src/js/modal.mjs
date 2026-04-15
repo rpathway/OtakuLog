@@ -1,6 +1,6 @@
 import { fetchSeriesDetails, normalizeSeriesDetails } from './anilist.mjs';
 import { getLists, addToList, removeFromList, getSeriesLists, getSeriesProgress, setProgress, createList, DEFAULT_LISTS } from './lists.mjs';
-import { initCarousel } from './utils.mjs';
+import { initCarousel, initListHints } from './utils.mjs';
 import { deleteList } from './lists.mjs';
 
 const normalizeInt = new Intl.NumberFormat('en', { notation: 'compact', compactDisplay: 'short' });
@@ -131,8 +131,13 @@ function buildModal() {
           </div>
           <!-- List management -->
           <div>
-            <h3 class="series-modal-title">My Lists</h3>
-            <div id="modal-lists" class="space-y-2"></div>
+            <h3 class="series-modal-title">My Lists</h3>            
+            <div class="series-modal-lists-wrapper">
+              <div id="modal-lists" class="series-modal-lists-container">
+              </div>
+              <div class="fade-top hidden"></div>
+              <div class="fade-bottom"></div>
+            </div>
             <div class="flex gap-2 mt-2">
               <input id="modal-new-list" type="text" placeholder="New list name..." class="series-modal-input flex-1">
               <button id="modal-add-list" class="series-modal-add-list-btn"><i class="bi bi-plus"></i> Add</button>
@@ -218,15 +223,19 @@ function renderLists(malId) {
 
     return `
       <div class="flex items-center justify-between text-sm">
-        <label class="flex items-center gap-2 text-white cursor-pointer">
+        <label class="text-lg flex items-center gap-2 text-white cursor-pointer">
           <i class="bi ${inList ? 'bi-check-circle-fill' : 'bi-check-circle'}"></i>
           <input type="checkbox" class="modal-list-checkbox hidden accent-secondary" data-list="${name}" ${inList ? 'checked' : ''}>
           ${name}
         </label>
-        ${!isDefault ? `<button class="modal-delete-list text-gray-500 hover:text-accent1 text-xs cursor-pointer border-none bg-transparent" data-list="${name}"><i class="bi bi-trash"></i></button>` : ''}
+        ${!isDefault ? `<button class="modal-delete-list text-gray-500 hover:text-accent1 cursor-pointer border-none bg-transparent" data-list="${name}"><i class="bi bi-trash"></i></button>` : ''}
       </div>
     `;
   }).join('');
+
+
+  // Fade hints
+  initListHints(container.parentNode);
 
   // Checkbox listeners
   container.querySelectorAll('.modal-list-checkbox').forEach(cb => {

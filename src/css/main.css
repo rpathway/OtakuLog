@@ -35,10 +35,10 @@
 
 
 .nav-link-large {
-  @apply flex px-6 py-2 mx-1 text-white no-underline rounded-lg transition-colors duration-300 cursor-pointer
-    hover:bg-secondary hover:text-black
-    hover:inset-ring-1 hover:inset-ring-accent1/30
-    hover:shadow-md    hover:shadow-secondary
+  @apply flex px-6 py-2 mx-1 text-white no-underline rounded-lg transition-colors duration-300 not-disabled:cursor-pointer
+    hover:not-disabled:bg-secondary hover:not-disabled:text-black
+    hover:not-disabled:inset-ring-1 hover:not-disabled:inset-ring-accent1/30
+    hover:not-disabled:shadow-md    hover:not-disabled:shadow-secondary
     [&.active]:font-semibold         [&.active]:bg-secondary
     [&.active]:text-black            [&.active]:inset-ring-1
     [&.active]:inset-ring-accent1/30 [&.active]:shadow-md
@@ -101,6 +101,10 @@
   @apply px-2 w-[150px] text-sm text-center text-white whitespace-nowrap overflow-hidden text-ellipsis
 }
 
+
+/* Fade hints for overflow containers */
+
+
 .fade-left, .fade-right {
   @apply pointer-events-none absolute top-0 bottom-8 w-15;
 }
@@ -119,6 +123,22 @@
 
 .fade-left button, .fade-right button {
   @apply pointer-events-auto text-white text-5xl cursor-pointer border-none hover:bg-slate-800/60 hover:rounded-2xl h-full w-50 m-0;
+}
+
+
+/* Series modal list fade hints */
+
+
+.fade-top, .fade-bottom {
+  @apply pointer-events-none absolute left-0 right-0 h-20;
+}
+
+.fade-top {
+  @apply top-0 bg-gradient-to-b from-secondary/10 via-[#161B22]/20 to-transparent rounded-t-2xl;
+}
+
+.fade-bottom {
+  @apply bottom-0 bg-gradient-to-t from-secondary/10 via-[#161B22]/20 to-transparent rounded-b-2xl;
 }
 
 
@@ -175,4 +195,91 @@
 
 .series-modal-add-list-btn {
   @apply bg-secondary/20 border border-secondary/30 text-accent1 text-sm px-3 py-1.5 rounded-lg hover:bg-secondary hover:text-black transition-colors cursor-pointer;
+}
+
+.series-modal-lists-wrapper {
+  @apply relative inline-block w-full mt-3 border-2 border-accent1/10 rounded-2xl;
+}
+
+.series-modal-lists-container {
+  /* @apply space-y-2 max-h-48 overflow-auto; */
+  @apply flex flex-col space-y-2 max-h-48 overflow-y-auto scroll-smooth [scrollbar-width:none] [scroll-snap-type:y_mandatory] rounded-2xl;
+}
+
+
+/* Lists sections */
+
+.accordion {
+  @apply flex justify-between w-full p-5 bg-accent3 inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary text-3xl cursor-pointer;
+}
+
+.accordion-panel {
+  @apply hidden [&.active]:flex flex-row gap-2 overflow-hidden;
+}
+
+
+/* Account form */
+
+form {
+  @apply flex flex-col p-4 m-auto md:w-lg text-left justify-between rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary bg-accent3;
+
+  & .input-box {
+    @apply p-1 ml-2 m-2 border-2 placeholder-shown:border-solid placeholder-shown:border-secondary rounded-xl focus:invalid:border-red-500 focus:valid:border-green-500;
+  }
+
+  & .touched {
+    @apply [&.touched:invalid]:border-red-500 [&.touched:valid]:border-green-500;
+  }
+}
+
+
+/* Search overlay */
+
+
+.search-overlay {
+  @apply fixed inset-0 z-50 items-start justify-center pt-16 sm:pt-24;
+}
+
+.search-backdrop {
+  @apply fixed inset-0 bg-black/70 backdrop-blur-sm;
+}
+
+.search-container {
+  @apply relative z-10 w-full sm:w-[min(90vw,48rem)] bg-gray-900 rounded-t-none sm:rounded-2xl max-h-[85dvh] flex flex-col inset-ring-1 inset-ring-accent1/30 shadow-lg shadow-secondary;
+}
+
+.search-bar-row {
+  @apply flex items-center gap-3 px-4 py-3 border-b border-gray-700 shrink-0;
+}
+
+.search-input {
+  @apply flex-1 bg-transparent text-white text-base placeholder:text-gray-500 outline-none;
+}
+
+.search-close-btn {
+  @apply text-gray-400 hover:text-white cursor-pointer bg-transparent border-none text-lg;
+}
+
+.search-filters {
+  @apply flex gap-2 px-4 py-2 border-b border-gray-700 overflow-x-auto [scrollbar-width:none] shrink-0 flex-wrap sm:flex-nowrap;
+}
+
+.search-select {
+  @apply bg-accent3 border border-accent1/30 text-white text-xs rounded-lg px-2 py-1.5 outline-none cursor-pointer shrink-0 focus:border-secondary;
+}
+
+.search-results {
+  @apply overflow-y-auto p-4 flex-1;
+}
+
+.search-result-card {
+  @apply cursor-pointer hover:opacity-80 transition-opacity;
+}
+
+
+/* Error homepage cards */
+
+
+.error-wrapper {
+  @apply flex flex-col p-1 m-[1px] w-full h-[200px] bg-accent3 rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary font-syne text-center justify-center;
 }

@@ -1,5 +1,5 @@
 <!-- Alert panel for showing status messages -->
-<div id="alert-panel" class="invisible fixed top-0 left-0 w-full p-4 z-50 bg-accent3 rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary transform -translate-y-full transition-transform duration-300 ease-out">
+<div id="alert-panel" class="invisible fixed top-0 left-0 w-full md:max-w-lg md:left-1/2 p-4 z-50 bg-accent3 rounded-xl inset-ring-1 inset-ring-accent1/30 shadow-sm shadow-secondary transform -translate-y-full md:-translate-x-1/2 transition-transform duration-300 ease-out">
   <div class="alert-message-container">
     <i id="alert-icon" class="bi bi-exclamation-circle-fill text-left pr-4 text-2xl"></i>
     <p id="alert-msg" class="text-left"></p>
@@ -16,13 +16,18 @@
   <!-- Desktop Nav -->
   <nav class="navigation hidden md:block font-syne">
     <ul class="flex flex-row list-none p-0 m-0">
-      <li><a data-route="home"     class="nav-link-large active">Home</a></li>
-      <li><a data-route="account" class="nav-link-large">Account</a></li>
-      <li><a data-route="search" class="nav-link-large">Search</a></li>
-      <li><a data-route="lists" class="nav-link-large">Lists</a></li>
+      <li><a data-route="home"     class="nav-link-large" title="Go to the home page">Home</a></li>
+      <li><a data-route="account" class="nav-link-large" title="View or create your account">Account</a></li>
+      <li><a data-route="search" class="nav-link-large" title="Search for a series">Search</a></li>
+      <li><a data-route="lists" class="nav-link-large" title="View your saved lists">Lists</a></li>
       <li>
-        <button class="settings-btn nav-link-large" aria-label="Navigation button to open the settings menu">
+        <button class="settings-btn nav-link-large" aria-label="Navigation button to open the settings menu" title="Open the settings menu">
           <i class="bi bi-gear-fill"></i>
+        </button>
+      </li>
+      <li class="hidden">
+        <button class="logout-btn nav-link-large disabled:bg-secondary/40 disabled:inset-ring-1 disabled:inset-ring-accent1/30 disabled:text-black" aria-label="Navigation button to log out of user's account" title="Log out of account">
+          <i class="bi bi-box-arrow-right"></i>
         </button>
       </li>
     </ul>
@@ -35,10 +40,15 @@
 <!-- Mobile Nav -->
 <nav id="mobile-nav" class="navigation md:hidden absolute top-[95px] left-0 w-full z-40 bg-primary font-syne">
   <ul class="hidden [.open_&]:flex flex-col list-none p-0 m-0">
-    <li class="nav-list-small"><a data-route="home" class="nav-link-small active">Home</a></li>
+    <li class="nav-list-small"><a data-route="home" class="nav-link-small">Home</a></li>
     <li class="nav-list-small"><a data-route="account" class="nav-link-small">Account</a></li>
     <li class="nav-list-small"><a data-route="search" class="nav-link-small">Search</a></li>
     <li class="nav-list-small"><a data-route="lists" class="nav-link-small">Lists</a></li>
+    <li class="hidden nav-list-small">
+      <button class="logout-btn nav-link-small w-full" aria-label="Navigation button to log out of user's account">
+        Logout
+      </button>
+    </li>
     <li class="nav-list-small">
       <button class="settings-btn nav-link-small w-full" aria-label="Navigation button to open the settings menu">
         Settings

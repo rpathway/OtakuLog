@@ -1,17 +1,11 @@
-const BASE_URL = import.meta.env.BASE_URL;
+import { openSearch } from './search.mjs';
+
+export const BASE_URL = import.meta.env.BASE_URL;
 const DEFAULT_SETTINGS = {
   sfw: {
     label: 'SFW Only',
     value: true
   },
-  // 'test-setting': {
-  //   label: 'Test Setting',
-  //   value: true
-  // },
-  // 'test-setting2': {
-  //   label: 'Test Setting1',
-  //   value: true
-  // },
 };
 
 
@@ -42,7 +36,7 @@ export function setLocalStorage(key='', value) {
  * 
  * @returns {Object}  JSON settings
  */
-function getSettings() {
+export function getSettings() {
   return JSON.parse(getLocalStorage('settings')) || { ...DEFAULT_SETTINGS };
 }
 
@@ -53,6 +47,16 @@ function getSettings() {
  */
 function saveSettings(settings = {}) {
   setLocalStorage('settings', JSON.stringify(settings));
+}
+
+// Retrieves saved local account data
+export function getAccount() {
+  return JSON.parse(getLocalStorage('login')) || {};
+}
+
+// Determines whether the user is logged in
+export function isLoggedIn() {
+  return getAccount().loggedIn ?? false;
 }
 
 
@@ -100,14 +104,14 @@ export function getParam(p = '') {
  * @param {String} page   The html partial to be fetched
  * @returns 
  */
-async function loadTemplate(page = '') {
+export async function loadTemplate(page = '') {
   try {
     const template = await fetchResource(page).then(r => r.text())
 
     if (template) {
       return template;
-    } else {
-      window.location.href = '/'
+    } else if (page.test(/header|footer/g)){
+      location.reload();
     }
 
   } catch (e) {
@@ -130,7 +134,7 @@ async function setHeaderIconImg() {
  * @param {Object} alertElement   The Alert Element
  * @returns {Function} show|hide  The Alert control functions to show or hide the alert panel
  */
-function createAlertController(alertElement) {
+export function createAlertController(alertElement) {
   let alertTimeout = null;
   let hideTimeout = null;
 
@@ -217,7 +221,6 @@ async function setSettingsListeners() {
       btn.addEventListener('click', (e) => {
         const name = btn.dataset.name;
         pendingSettings[name].value = !pendingSettings[name].value;
-        console.log(`hasunsaved: ${hasUnsavedChanges()}`)
         saveSettingsBtn.disabled = !hasUnsavedChanges();
 
         setSettings(pendingSettings);
@@ -274,11 +277,14 @@ async function setNavListeners() {
   const mobileNav = document.getElementById('mobile-nav');
   const mobileNavLinks = mobileNav.querySelectorAll('a');
   const overlay = document.querySelector('.nav-overlay');
+  const logoutBtn = document.querySelectorAll('.logout-btn');
+  const searchBtns = document.querySelectorAll('[data-route="search"]');
 
 
   // Sets the base url in the nav links for page routing
   nav.forEach(navMenu => {
     navMenu.querySelectorAll('[data-route]').forEach(link => {
+      const loggedIn = isLoggedIn();
       const base = import.meta.env.BASE_URL;
       const routes = {
         home: '',
@@ -288,6 +294,20 @@ async function setNavListeners() {
       };
       const route = link.dataset.route;
       link.href = base + routes[route];
+
+      if (loggedIn && route == 'account') {
+        // Render profile view
+        link.parentElement.classList.add('hidden');
+        logoutBtn.forEach(btn => {
+          btn.parentElement.classList.remove('hidden');
+          btn.disabled = false;
+        })
+      } else if (!loggedIn && route == 'account') {
+        link.classList.remove('hidden');
+      }
+
+      // Set active page in nav
+      if (window.location.href === link.href) link.classList.add('active')
     });
   })
 
@@ -312,6 +332,15 @@ async function setNavListeners() {
     mobileNav.classList.toggle('open');
   });
 
+  // popen search bar
+  searchBtns.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      openSearch();
+    });
+  });
+
   mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => {
       if (window.innerWidth < 640) {
@@ -331,6 +360,25 @@ async function setNavListeners() {
       overlay.classList.remove('active');
       hamburger.innerHTML = '<i class="bi bi-list"></i>'
     }
+  });
+
+  // Sets listener for logout buttons to log out of account
+  logoutBtn.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.disabled = true;
+
+      const alertPanel = document.getElementById('alert-panel');
+      const alertController = createAlertController(alertPanel);
+      const account = getAccount()
+      account.loggedIn = false;
+
+      setLocalStorage('login', JSON.stringify(account));
+
+      alertController.show('Logged out!', 'success')
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    })
   });
 }
 
@@ -386,4 +434,23 @@ export function initCarousel(carouselWrapper) {
 
   // Wait for images to load before setting scroll width because of lazy loading
   Promise.all([...carousel.querySelectorAll('img')].map(img => img.complete ? Promise.resolve() : new Promise(r => img.addEventListener('load', r)))).then(updateFades);
+}
+
+// Adds fade hints to lists
+export function initListHints(listContainer) {
+  console.log(listContainer.outerHTML)
+  const container = listContainer.querySelector('.series-modal-lists-container');
+  const fadeTop = listContainer.querySelector('.fade-top');
+  const fadeBot = listContainer.querySelector('.fade-bottom');
+
+  function updateFade() {
+    const maxScroll = container.scrollHeight - container.clientHeight;
+    console.log(`max: ${maxScroll}`)
+
+    fadeTop.classList.toggle('hidden', container.scrollTop < 1);
+    fadeBot.classList.toggle('hidden', container.scrollTop >= maxScroll - 1);
+  }
+
+  container.addEventListener('scroll', updateFade);
+  window.addEventListener('resize', updateFade);
 }
