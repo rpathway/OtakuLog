@@ -78,6 +78,7 @@ function buildAccordion(data) {
     const listName = entry[0];
     const listData = entry[1];
     if (listData.length === 0 ) return;
+    main.querySelector('#no-list-message').classList.add('hidden');
 
     const section = buildSections(listName);
     main.appendChild(section);

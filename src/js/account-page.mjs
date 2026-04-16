@@ -63,14 +63,6 @@ async function deliverAccountPage(params) {
  * 
  */
 async function initAccountPage() {
-  // const main = document.querySelector('main');
-  // try {
-  //   const formPage = await loadTemplate(`${BASE_URL}partials/account-login.html`);
-  //   main.innerHTML = formPage;
-  // } catch (e) {
-  //   console.error(`Error in deliverFormPage: ${e}`);
-  // }
-
   const accountForm = document.getElementById('account-form');
   const submitBtn = document.getElementById('submit-form-btn');
   const toggleFormBtn = document.getElementById('toggle-form-btn');
