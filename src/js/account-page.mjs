@@ -62,14 +62,14 @@ async function deliverAccountPage(params) {
  *  initializes login/signup form listeners
  * 
  */
-async function deliverFormPage() {
-  const main = document.querySelector('main');
-  try {
-    const formPage = await loadTemplate(`${BASE_URL}partials/account-login.html`);
-    main.innerHTML = formPage;
-  } catch (e) {
-    console.error(`Error in deliverFormPage: ${e}`);
-  }
+async function initAccountPage() {
+  // const main = document.querySelector('main');
+  // try {
+  //   const formPage = await loadTemplate(`${BASE_URL}partials/account-login.html`);
+  //   main.innerHTML = formPage;
+  // } catch (e) {
+  //   console.error(`Error in deliverFormPage: ${e}`);
+  // }
 
   const accountForm = document.getElementById('account-form');
   const submitBtn = document.getElementById('submit-form-btn');
@@ -226,16 +226,17 @@ async function deliverFormPage() {
  *    Loads account view if logged in.
  */
 async function init() {
-  const hasLogin = getAccount();
+  // const hasLogin = getAccount();
 
   // Deliver form login/signup page
-  if (!hasLogin || hasLogin?.loggedIn === false) {
-    await deliverFormPage()
+  await initAccountPage();
+  // if (!hasLogin || hasLogin?.loggedIn === false) {
+  //   await deliverFormPage()
 
-  // Deliver account view
-  } else if (hasLogin.loggedIn) {
-    // await deliverAccountPage();
-  }
+  // // Deliver account view
+  // } else if (hasLogin.loggedIn) {
+  //   // await deliverAccountPage();
+  // }
 }
 
 init()
